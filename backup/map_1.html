@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thermal Map</title>
+    <!-- Include Leaflet CSS and JavaScript -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Include Leaflet.heat plugin -->
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/leaflet-heat.js"></script>
+    <!-- Include your data source if necessary -->
+</head>
+<body>
+    <!-- Create a div to hold the map -->
+    <div id="map" style="height: 600px;"></div>
+
+    <!-- Include your JavaScript code here -->
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13); // Set the initial center and zoom level
+
+        // Add a tile layer (you can use various map providers, e.g., OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Sample data for the first heat layer (latitude, longitude, intensity)
+        var data1 = [
+            [51.5, -0.09, 0.5],
+            // Add more data points as needed
+        ];
+
+        // Sample data for the second heat layer (latitude, longitude, intensity)
+        var data2 = [
+            [51.51, -0.1, 0.7],
+            // Add more data points as needed
+        ];
+
+        // Create HeatLayers for each data source
+        var heatLayer1 = L.heatLayer(data1, { radius: 25 }).addTo(map); // Customize options as needed
+        var heatLayer2 = L.heatLayer(data2, { radius: 25, gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } }).addTo(map);
+
+        // Create layer control to toggle between heat layers
+        var baseLayers = {
+            "Heat Layer 1": heatLayer1,
+            "Heat Layer 2": heatLayer2,
+        };
+
+        // Add layer control to the map
+        L.control.layers(baseLayers).addTo(map);
+    </script>
+    
+</body>
+</html>

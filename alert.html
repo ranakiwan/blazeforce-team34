@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fire Map</title>
+    <style>
+        /* Style the map container */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        /* Style the alert message */
+        #alert {
+            display: none;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fire Map</h1>
+    <!-- Display an alert message when temperature exceeds the threshold -->
+    <div id="alert">High Temperature Alert!</div>
+    <!-- Map container -->
+    <div id="map"></div>
+
+    <script>
+        // Replace the following data with your fire incident data
+        const fireIncidents = [
+            { location: { lat: 37.7749, lng: -122.4194 }, temperature: 30 },
+            { location: { lat: 38.8951, lng: -77.0364 }, temperature: 25 },
+            // Add more fire incidents here
+        ];
+
+        // Set the temperature threshold for the alert
+        const temperatureThreshold = 28;
+
+        // Initialize the map
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 0, lng: 0 },
+                zoom: 2
+            });
+
+            // Add markers for fire incidents
+            fireIncidents.forEach(incident => {
+                const marker = new google.maps.Marker({
+                    position: incident.location,
+                    map: map,
+                    title: `Temperature: ${incident.temperature}°C`
+                });
+
+                // Check if the temperature exceeds the threshold
+                if (incident.temperature > temperatureThreshold) {
+                    document.getElementById('alert').style.display = 'block';
+                }
+            });
+        }
+    </script>
+    <h1>Scales of Measurement for Fire Data</h1>
+    <table>
+        <tr>
+            <th>Scale</th>
+            <th>Description</th>
+            <th>Examples</th>
+        </tr>
+        <tr>
+            <td>Nominal</td>
+            <td>Categories with no inherent order or ranking.</td>
+            <td>Fire types (e.g., forest fire, urban fire)</td>
+        </tr>
+        <tr>
+            <td>Ordinal</td>
+            <td>Categories with order but no consistent intervals.</td>
+            <td>Fire danger levels (e.g., low, moderate, high)</td>
+        </tr>
+        <tr>
+            <td>Interval</td>
+            <td>Equal intervals between categories with no true zero point.</td>
+            <td>Temperature (in °C or °F)</td>
+        </tr>
+        <tr>
+            <td>Ratio</td>
+            <td>Equal intervals with a meaningful zero point.</td>
+            <td>Fire duration (in minutes), fire size (in acres)</td>
+        </tr>
+    </table>
+
+
+    <!-- Load the Google Maps API with your API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>

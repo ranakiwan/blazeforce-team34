@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Thermal Map</title>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario' async defer></script>
+    <script type='text/javascript'>
+        function loadMapScenario() {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: 'AglHZwDpu8J0k5llaYG64UlF5hMYKwAgr6CvFjlMxgfMTFYqnAJ9t2M9KHlK2P4e',
+                center: new Microsoft.Maps.Location(47.6062, -122.3321),
+                zoom: 8
+            });
+            //6a41face5f59aba6184ed9c5da546b13
+
+            // Create a custom thermal layer and overlay it on the map.
+            // This is where you would render your thermal data.
+            var thermalLayer = new Microsoft.Maps.Layer();
+            map.layers.insert(thermalLayer);
+        }
+    </script>
+</head>
+<body>
+    <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container">
+        <form class="form" id="loginForm">
+            <h1>Login </h1>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <button class="btn" onclick="redirectToCivilDefense()">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the entered username and password
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Check if the credentials are correct (username and password are both "admin")
+            if (username === "admin" && password === "admin") {
+                // Redirect to civilDefensePage.html
+                window.location.href = "civilDefensePage.html";
+            } else {
+                // Display an error message
+                alert("Invalid username or password. Please try again.");
+            }
+        });
+    </script>
+
+</body>
+</body>
+</html>

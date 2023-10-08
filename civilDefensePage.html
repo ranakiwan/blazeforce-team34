@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arduino Sensor Data</title>
+    <link rel="stylesheet" type="text/css" href="./css/sensor.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Arduino Pi Sensor Data</h1>
+        <div id="sensor-data">
+            <p><strong>Temperature:</strong> <span id="temperature">Loading...</span> °C</p>
+            <p><strong>Humidity:</strong> <span id="humidity">Loading...</span>%</p>
+            <p><strong>Light Level:</strong> <span id="light-level">Loading...</span> lux</p>
+        </div>
+        <div id="alert"></div>
+        <audio id="alert-sound" src="alert.mp3" preload="auto"></audio>
+        <div class="container">
+            <h1>Thermal Activity Graph</h1>
+            <div id="thermal-graph-container">
+                <canvas id="thermal-graph"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/sensor.js"></script>
+    <script src="./scripts/graph.js"></script>
+</body>
+</html>

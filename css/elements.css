@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between; /* Adjust this as needed */
+}
+
+/* Style each element */
+.element {
+    width: 800px;
+    height: 600px;
+    background-color: white;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+    margin: 10px;
+}

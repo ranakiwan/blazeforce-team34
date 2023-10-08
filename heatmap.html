@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        /* Style for the sensor data container */
+        .sensor-data {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+	<script type='text/javascript'>
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myHeatMap', {
+            credentials: 'AglHZwDpu8J0k5llaYG64UlF5hMYKwAgr6CvFjlMxgfMTFYqnAJ9t2M9KHlK2P4e'
+        });
+
+        //Generate a 1,000 random locations that are within the bounds of the map view.
+        var locs = Microsoft.Maps.TestDataGenerator.getLocations(1000, map.getBounds());
+
+        //Load the HeatMap module.
+        Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
+            var heatmap = new Microsoft.Maps.HeatMapLayer(locs);
+            map.layers.insert(heatmap);
+        });
+    }
+    </script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+</head>
+<body>
+    <div id="myHeatMap" style="position:relative;width:100%;height:400px;"></div>
+    <h1>Thermal Sensor Data</h1>
+    <div class="sensor-data">
+        <h2>Sensor A</h2>
+        <p>Thermal Activity: <span id="thermal-activity">28.5°C</span></p>
+        <p>Heat Level: <span id="heat-level">High</span></p>
+    </div>
+    <div class="sensor-data">
+        <h2>Sensor B</h2>
+        <p>Thermal Activity: <span id="thermal-activity">21.5°C</span></p>
+        <p>Heat Level: <span id="heat-level">Moderate</span></p>
+    </div>
+    <div class="sensor-data">
+        <h2>Sensor C</h2>
+        <p>Thermal Activity: <span id="thermal-activity">17.5°C</span></p>
+        <p>Heat Level: <span id="heat-level">Moderate</span></p>
+    </div>
+    <script>
+        // Generate random thermal activity data between 20°C and 40°C
+        var thermalData = (Math.random() * 20 + 20).toFixed(1);
+
+        // Determine heat level based on thermal data
+        var heatLevel = "";
+        if (thermalData < 25) {
+            heatLevel = "Low";
+        } else if (thermalData < 30) {
+            heatLevel = "Moderate";
+        } else {
+            heatLevel = "High";
+        }
+
+        // Update the sensor data in the HTML
+        document.getElementById('thermal-activity').textContent = thermalData + "°C";
+        document.getElementById('heat-level').textContent = heatLevel;
+        setInterval(updateSensorData, 2000);
+        updateSensorData();
+    </script>
+</body>
+</html>
